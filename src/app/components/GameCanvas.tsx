@@ -54,11 +54,55 @@ const GameCanvas = () => {
   }, [updateGameState]);
 
   const drawCharacters = (ctx: CanvasRenderingContext2D) => {
-    // Draw stick figures and their animations
+    Object.values(gameState.characters).forEach((char) => {
+      // Save context state
+      ctx.save();
+      
+      // Set character color
+      ctx.strokeStyle = char.id;
+      ctx.lineWidth = 2;
+      
+      // Draw stick figure
+      ctx.beginPath();
+      
+      // Head
+      ctx.arc(char.x, char.y - 20, 10, 0, Math.PI * 2);
+      
+      // Body
+      ctx.moveTo(char.x, char.y - 10);
+      ctx.lineTo(char.x, char.y + 20);
+      
+      // Arms
+      ctx.moveTo(char.x - 15, char.y);
+      ctx.lineTo(char.x + 15, char.y);
+      
+      // Legs
+      ctx.moveTo(char.x, char.y + 20);
+      ctx.lineTo(char.x - 10, char.y + 40);
+      ctx.moveTo(char.x, char.y + 20);
+      ctx.lineTo(char.x + 10, char.y + 40);
+      
+      // Draw the figure
+      ctx.stroke();
+      
+      // Restore context state
+      ctx.restore();
+    });
   };
 
   const drawEnvironment = (ctx: CanvasRenderingContext2D) => {
-    // Draw background and interactive elements
+    // Draw ground
+    ctx.fillStyle = '#333';
+    ctx.fillRect(0, 450, ctx.canvas.width, 5);
+    
+    // Draw background elements
+    ctx.fillStyle = '#222';
+    for (let i = 0; i < 5; i++) {
+      const x = Math.random() * ctx.canvas.width;
+      const y = Math.random() * 400;
+      const size = Math.random() * 20 + 10;
+      ctx.fillRect(x, y, size, size);
+    }
   };
 
   return (

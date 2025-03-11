@@ -4,13 +4,19 @@
 
 :root {
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 52, 53, 65;
-  --background-end-rgb: 52, 53, 65;
+  --background-rgb: 26, 26, 26;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-start-rgb));
+  background: rgb(var(--background-rgb));
+  overflow: hidden;
+}
+
+/* Game specific styles */
+.pixel-art {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
 /* Custom scrollbar */
@@ -30,6 +36,25 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #6b7280;
+}
+
+/* Animation keyframes */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float {
+  animation: float 2s ease-in-out infinite;
+}
+
+/* Character selection glow effect */
+.character-glow {
+  filter: drop-shadow(0 0 8px currentColor);
 }
 
 /* Textarea autoresize */
